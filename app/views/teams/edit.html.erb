@@ -1,9 +1,15 @@
-<h1>Edit team</h1>
+<header>
+  <h1>Edit team</h1>
+</header>
 
-<div>
-  <%= link_to "Back to teams", teams_path %>
-</div>
+<main>
+  <div>
+    <%= link_to "Back to teams", teams_path %>
+  </div>
 
-<div>
-  <%= render "form", team: @team %>
-</div>
+  <div>
+    <%= turbo_frame_tag @team do %>
+      <%= render "form", team: @team %>
+    <% end %>
+  </div>
+</main>

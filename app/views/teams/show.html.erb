@@ -1,8 +1,12 @@
-<h1><%= @team.name %></h1>
+<header>
+  <h1><%= @team.name %></h1>
+</header>
 
-<div>
-  <%= link_to "Edit this team", edit_team_path(@team) %> |
-  <%= link_to "Back to teams", teams_path %>
+<main>
+  <div>
+    <%= link_to "Edit this team", edit_team_path(@team) %> |
+    <%= link_to "Back to teams", teams_path %>
 
-  <%= button_to "Destroy this team", @team, method: :delete %>
-</div>
+    <%= button_to "Destroy this team", @team, method: :delete %>
+  </div>
+</main>

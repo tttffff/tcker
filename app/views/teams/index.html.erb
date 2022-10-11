@@ -1,7 +1,17 @@
-<h1>Teams</h1>
+<header>
+  <h1>Teams</h1>
+</header>
 
-<%= link_to "New team", new_team_path %>
+<main>
+  <section>
+  <%= turbo_frame_tag Team.new do %>
+      <%= link_to "New team", new_team_path %>
+  <% end %>
+  </section>
 
-<div id="teams">
-  <%= render @teams %>
-</div>
+  <article>
+    <%= turbo_frame_tag "teams" do %>
+      <%= render @teams %>
+    <% end %>
+  </article>
+</main>

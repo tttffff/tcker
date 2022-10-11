@@ -7,6 +7,6 @@ RSpec.describe "teams/index", type: :view do
 
   it "renders a list of teams" do
     render
-    assert_select "p>a", text: "Team 1", count: 2
+    assert_select "section>a", text: "Team 1", count: 2
   end
 end

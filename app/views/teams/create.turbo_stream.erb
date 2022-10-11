@@ -1,0 +1,3 @@
+<%= turbo_stream.update Team.new, link_to("New team", new_team_path) %>
+<%= turbo_stream.prepend "teams", @team %>
+<%= render_turbo_stream_flash_messages %>

@@ -2,7 +2,7 @@ class TeamsController < ApplicationController
   before_action :set_team, only: %i[ show edit update destroy ]
 
   def index
-    @teams = Team.all
+    @teams = Team.ordered
   end
 
   def show
@@ -21,6 +21,7 @@ class TeamsController < ApplicationController
     respond_to do |format|
       if @team.save
         format.html { redirect_to teams_url, notice: "Team was successfully created." }
+        format.turbo_stream { flash.now[:notice] = "Team was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -31,6 +32,7 @@ class TeamsController < ApplicationController
     respond_to do |format|
       if @team.update(team_params)
         format.html { redirect_to teams_url, notice: "Team was successfully updated." }
+        format.turbo_stream { flash.now[:notice] = "Team was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -41,7 +43,8 @@ class TeamsController < ApplicationController
     @team.destroy
 
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: "Team was successfully destroyed." }
+      format.html { redirect_to teams_url, notice: "Team was successfully removed." }
+      format.turbo_stream { flash.now[:notice] = "Team was successfully removed." }
     end
   end
 

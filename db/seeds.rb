@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+Team.destroy_all
+FactoryBot.create(:team_day_job)
+FactoryBot.create(:team_night_job)
+FactoryBot.create(:team_weekend_job)

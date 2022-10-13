@@ -1,0 +1,11 @@
+<header><h1>HoMe PaGe</h1></header>
+
+<main>
+  <p>tcker tcker time tracker</p>
+
+  <% if user_signed_in? %>
+    <%= link_to "View Teams", teams_path %>
+  <% else %>
+    <%= link_to "Sign in", new_user_session_path %>
+  <% end %>
+</main>

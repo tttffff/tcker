@@ -1,7 +1,9 @@
 <%= turbo_frame_tag team do %>
   <section>
       <%= link_to team.name, team_path(team), data: {turbo_frame: "_top" } %>
-      <%= link_to "Edit", edit_team_path(team) %>
-      <%= button_to "Delete", team_path(team), method: :delete %>
+      <% if policy(team).update? %>
+        <%= link_to "Edit", edit_team_path(team) %>
+        <%= button_to "Delete", team_path(team), method: :delete %>
+      <% end %>
   </section>
 <% end %>

@@ -2,24 +2,29 @@ class TeamsController < ApplicationController
   before_action :set_team, only: %i[ show edit update destroy ]
 
   def index
-    @teams = Team.ordered
+    @teams = policy_scope(Team).ordered
   end
 
   def show
+    authorize @team 
   end
 
   def new
     @team = Team.new
+    authorize @team
   end
 
   def edit
+    authorize @team
   end
 
   def create
     @team = Team.new(team_params)
+    authorize @team
 
     respond_to do |format|
       if @team.save
+        current_user.add_role :team_owner, @team
         format.html { redirect_to teams_url, notice: "Team was successfully created." }
         format.turbo_stream { flash.now[:notice] = "Team was successfully created." }
       else
@@ -29,6 +34,7 @@ class TeamsController < ApplicationController
   end
 
   def update
+    authorize @team
     respond_to do |format|
       if @team.update(team_params)
         format.html { redirect_to teams_url, notice: "Team was successfully updated." }
@@ -40,6 +46,7 @@ class TeamsController < ApplicationController
   end
 
   def destroy
+    authorize @team
     @team.destroy
 
     respond_to do |format|
@@ -50,7 +57,7 @@ class TeamsController < ApplicationController
 
   private
     def set_team
-      @team = Team.find(params[:id])
+      @team = policy_scope(Team).find(params[:id])
     end
 
     def team_params

@@ -8,11 +8,11 @@ class Team < ApplicationRecord
 
     scope :ordered, -> { order(id: :desc) }
 
-    def self.can_read
+    def self.can_read_roles
         ROLES_CAN_READ
     end
 
-    def self.can_manage
+    def self.can_manage_roles
         ROLES_CAN_MANAGE
     end
 end

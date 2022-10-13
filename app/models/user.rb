@@ -11,6 +11,8 @@ class User < ApplicationRecord
   before_validation :make_username, on: :create
   after_create :create_team
 
+  has_and_belongs_to_many :roles, :join_table => :users_roles
+
   private
 
   # Instead of getting the user to add a username at sign up, we'll just make one for them

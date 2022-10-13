@@ -10,7 +10,8 @@ gem "rails", "~> 7.0.4"
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+# gem "sqlite3", "~> 1.4"
+gem "mysql2"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -50,7 +51,8 @@ gem "bootsnap", require: false
 
 gem "devise"
 gem "rolify"
-gem "pundit"
+# gem "pundit"
+gem "cancancan"
 
 group :development, :test do
   gem "rspec-rails"

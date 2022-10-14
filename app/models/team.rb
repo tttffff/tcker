@@ -3,16 +3,13 @@ class Team < ApplicationRecord
     
     validates :name, presence: true
 
-    ROLES_CAN_MANAGE = %i[team_owner team_manager].freeze
-    ROLES_CAN_READ = (ROLES_CAN_MANAGE + %i[team_member]).freeze
-
     scope :ordered, -> { order(id: :desc) }
 
-    def self.can_read_roles
-        ROLES_CAN_READ
+    def self.can_read
+        %i[team_owner team_manager]
     end
 
-    def self.can_manage_roles
-        ROLES_CAN_MANAGE
+    def self.can_manage
+        %i[team_owner team_manager team_member]
     end
 end

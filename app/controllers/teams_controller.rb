@@ -14,8 +14,6 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @team = Team.new(team_params)
-
     respond_to do |format|
       if @team.save
         current_user.add_role :team_owner, @team

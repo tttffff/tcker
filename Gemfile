@@ -51,7 +51,6 @@ gem "bootsnap", require: false
 
 gem "devise"
 gem "rolify"
-# gem "pundit"
 gem "cancancan"
 
 group :development, :test do

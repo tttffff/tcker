@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Teams", type: :system do
+RSpec.describe "Teams", type: :system, js: true do
   before do
     @team = FactoryBot.create(:team_day_job)
     user = FactoryBot.create(:user_alice)
@@ -13,9 +13,9 @@ RSpec.describe "Teams", type: :system do
     expect(page).to have_css("h1", text: "Teams")
 
     click_on "New team"
-    expect(page).to have_css("h1", text: "New team")
-
     fill_in "Name", with: "Team 1"
+
+    expect(page).to have_css("h1", text: "Teams")
     click_on "Create Team"
 
     expect(page).to have_css("h1", text: "Teams")
@@ -34,9 +34,9 @@ RSpec.describe "Teams", type: :system do
     expect(page).to have_css("h1", text: "Teams")
 
     click_on "Edit", match: :first
-    expect(page).to have_css("h1", text: "Edit team")
-
     fill_in "Name", with: "Updated team"
+
+    expect(page).to have_css("h1", text: "Teams")
     click_on "Update Team"
 
     expect(page).to have_css("h1", text: "Teams")

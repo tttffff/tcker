@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "Teams", type: :system do
-  before { @team = FactoryBot.create(:team_day_job) }
+  before do
+    @team = FactoryBot.create(:team_day_job)
+    user = FactoryBot.create(:user_alice)
+    user.add_role :team_owner, @team
+    sign_in user
+  end
 
   scenario "user creates a team" do
     visit teams_path

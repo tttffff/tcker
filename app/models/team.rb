@@ -6,10 +6,10 @@ class Team < ApplicationRecord
     scope :ordered, -> { order(id: :desc) }
 
     def self.can_read
-        %i[team_owner team_manager]
+        %i[team_owner team_manager team_member]
     end
 
     def self.can_manage
-        %i[team_owner team_manager team_member]
+        %i[team_owner team_manager]
     end
 end

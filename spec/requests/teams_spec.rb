@@ -1,11 +1,11 @@
-require 'rails_helper'
-require 'support/create_with_role_helpers'
+require "rails_helper"
+require "support/create_with_role_helpers"
 
 RSpec.describe "/teams", type: :request do
-  let(:valid_attributes) { { name: "MyString" } }
-  let(:invalid_attributes) { { name: nil } }
+  let(:valid_attributes) { {name: "MyString"} }
+  let(:invalid_attributes) { {name: nil} }
   let(:user) { FactoryBot.create(:user) }
-  
+
   before { sign_in user }
 
   describe "GET /index" do
@@ -62,12 +62,12 @@ RSpec.describe "/teams", type: :request do
     context "with valid parameters" do
       it "creates a new Team" do
         expect {
-          post teams_url, params: { team: valid_attributes }
+          post teams_url, params: {team: valid_attributes}
         }.to change(Team, :count).by(1)
       end
 
       it "redirects to the created team" do
-        post teams_url, params: { team: valid_attributes }
+        post teams_url, params: {team: valid_attributes}
         expect(response).to redirect_to(teams_url)
       end
     end
@@ -75,12 +75,12 @@ RSpec.describe "/teams", type: :request do
     context "with invalid parameters" do
       it "does not create a new Team" do
         expect {
-          post teams_url, params: { team: invalid_attributes }
+          post teams_url, params: {team: invalid_attributes}
         }.to change(Team, :count).by(0)
       end
 
       it "renders a response with a 422 status to display the 'new' template" do
-        post teams_url, params: { team: invalid_attributes }
+        post teams_url, params: {team: invalid_attributes}
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -89,18 +89,18 @@ RSpec.describe "/teams", type: :request do
   describe "PATCH /update" do
     context "when the user has a manage role" do
       context "with valid parameters" do
-        let(:new_attributes) { { name: "MyString123" } }
+        let(:new_attributes) { {name: "MyString123"} }
 
         it "updates the requested team" do
           team = create_with_manager(Team)
-          patch team_url(team), params: { team: new_attributes }
+          patch team_url(team), params: {team: new_attributes}
           team.reload
           expect(team.name).to eq("MyString123")
         end
 
         it "redirects to the team" do
           team = create_with_manager(Team)
-          patch team_url(team), params: { team: new_attributes }
+          patch team_url(team), params: {team: new_attributes}
           team.reload
           expect(response).to redirect_to(teams_url)
         end
@@ -109,7 +109,7 @@ RSpec.describe "/teams", type: :request do
       context "with invalid parameters" do
         it "renders a response with a 422 status to display the 'edit' template" do
           team = create_with_manager(Team)
-          patch team_url(team), params: { team: invalid_attributes }
+          patch team_url(team), params: {team: invalid_attributes}
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -118,7 +118,7 @@ RSpec.describe "/teams", type: :request do
     context "when the user doesn't have a manage role" do
       it "redirects to the home page" do
         team = create_with_other(Team).tap { |t| t.update!(name: "MyString123") }
-        patch team_url(team), params: { team: { name: "ANYTHING" } }
+        patch team_url(team), params: {team: {name: "ANYTHING"}}
         team.reload
         expect(team.name).to eq("MyString123") # The team name should not have changed
         expect(response).to redirect_to(root_url)

@@ -6,7 +6,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :trackable, :validatable
+    :trackable, :validatable
 
   validates_presence_of :username
   validates_uniqueness_of :username
@@ -17,13 +17,13 @@ class User < ApplicationRecord
   rolify after_add: :invalidate_cache, after_remove: :invalidate_cache
 
   def invalidate_cache(role)
-    Rails.cache.delete_matched("role_cache#{self.id}#{role.resource_type}")
+    Rails.cache.delete_matched("role_cache#{id}#{role.resource_type}")
   end
 
   def allowed_resource_ids(resource, action)
     valid_roles = resource.send(action)
     # TODO: Consider the expiry time.
-    Rails.cache.fetch("role_cache#{self.id}#{resource}#{valid_roles}", expires_in: 5.days) do
+    Rails.cache.fetch("role_cache#{id}#{resource}#{valid_roles}", expires_in: 5.days) do
       resource.with_role(valid_roles, self).pluck(:id)
     end
   end

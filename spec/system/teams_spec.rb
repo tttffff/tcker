@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Teams", type: :system do
   before do
@@ -28,7 +28,7 @@ RSpec.describe "Teams", type: :system do
 
     expect(page).to have_css("h1", text: @team.name)
   end
-  
+
   scenario "updating a team" do
     visit teams_path
     expect(page).to have_css("h1", text: "Teams")
@@ -42,7 +42,7 @@ RSpec.describe "Teams", type: :system do
     expect(page).to have_css("h1", text: "Teams")
     expect(page).to have_content("Updated team")
   end
-  
+
   scenario "Destroying a team" do
     visit teams_path
     expect(page).to have_content(@team.name)

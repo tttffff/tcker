@@ -1,15 +1,15 @@
 class Team < ApplicationRecord
-    resourcify
+  resourcify
 
-    validates :name, presence: true
+  validates :name, presence: true
 
-    scope :ordered, -> { order(id: :desc) }
+  scope :ordered, -> { order(id: :desc) }
 
-    def self.can_read
-        %i[team_owner team_manager team_member]
-    end
+  def self.can_read
+    %i[team_owner team_manager team_member]
+  end
 
-    def self.can_manage
-        %i[team_owner team_manager]
-    end
+  def self.can_manage
+    %i[team_owner team_manager]
+  end
 end
